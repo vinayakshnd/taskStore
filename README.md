@@ -1,22 +1,25 @@
 # taskStore
 
-## Pre-requists
+### Prerequisite
 1. Make sure your local development setup has go runtime installed. 
 For installation, refer to [instructions](https://go.dev/doc/install).
 
-## Running Web Application
-1. Download dependancies and run the web application.
+### Running Web Application
+
+Download dependancies and run the web application.
 ```
 make all
 ```
 
-## Testing Web Application
-1 . Run the tests.
+### Testing Web Application
+
+Run the tests.
 ```
 make test
 ```
 
-## Sample API invocations
+### Sample API invocations
+
 1. List existing tasks.
 ```
 curl --location 'http://10.13.106.157:8083/tasks' | jq .
@@ -78,3 +81,7 @@ curl -v --location --request DELETE 'http://10.13.106.157:8083/tasks/3'
 <
 * Connection #0 to host 10.13.106.157 left intact
 ```
+
+# Swagger UI
+
+![Screenshot 2023-07-17 at 9 40 26 PM](https://github.com/vinayakshnd/taskStore/assets/4953411/f53e052b-93ac-49f5-bd9f-0141bcbf0a69)
