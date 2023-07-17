@@ -102,4 +102,6 @@ curl -v --location --request DELETE 'http://0.0.0.0:8083/tasks/3'
 
 # Swagger UI
 
+*[Note: Swagger definition files are present in `docs` folder.]*
+
 ![Screenshot 2023-07-17 at 9 40 26 PM](https://github.com/vinayakshnd/taskStore/assets/4953411/f53e052b-93ac-49f5-bd9f-0141bcbf0a69)
