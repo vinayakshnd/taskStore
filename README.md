@@ -22,7 +22,7 @@ make test
 
 1. List existing tasks.
 ```
-curl --location 'http://10.13.106.157:8083/tasks' | jq .
+curl --location 'http://0.0.0.0:8083/tasks' | jq .
 [
   {
     "id": 1,
@@ -40,7 +40,7 @@ curl --location 'http://10.13.106.157:8083/tasks' | jq .
 2. Get details of specific task by taskId.
 
 ```
-curl --location 'http://10.13.106.157:8083/tasks/1' | jq .
+curl --location 'http://0.0.0.0:8083/tasks/1' | jq .
 {
   "id": 1,
   "title": "P0",
@@ -51,7 +51,7 @@ curl --location 'http://10.13.106.157:8083/tasks/1' | jq .
 3. Create a new task.
 
 ```
-curl --location 'http://10.13.106.157:8083/tasks' --data '{
+curl --location 'http://0.0.0.0:8083/tasks' --data '{
   "id": 3,
   "title": "P1",
   "content": "This is a medium priority task"
@@ -66,12 +66,12 @@ curl --location 'http://10.13.106.157:8083/tasks' --data '{
 4. Delete existing task.
 
 ```
-curl -v --location --request DELETE 'http://10.13.106.157:8083/tasks/3'
-*   Trying 10.13.106.157...
+curl -v --location --request DELETE 'http://0.0.0.0:8083/tasks/3'
+*   Trying 0.0.0.0...
 * TCP_NODELAY set
-* Connected to 10.13.106.157 (10.13.106.157) port 8083 (#0)
+* Connected to 0.0.0.0 (0.0.0.0) port 8083 (#0)
 > DELETE /tasks/3 HTTP/1.1
-> Host: 10.13.106.157:8083
+> Host: 0.0.0.0:8083
 > User-Agent: curl/7.58.0
 > Accept: */*
 >
@@ -79,7 +79,7 @@ curl -v --location --request DELETE 'http://10.13.106.157:8083/tasks/3'
 < Content-Type: application/json
 < Date: Mon, 17 Jul 2023 15:13:02 GMT
 <
-* Connection #0 to host 10.13.106.157 left intact
+* Connection #0 to host 0.0.0.0 left intact
 ```
 
 # Swagger UI
