@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 // Task represents the task entity
@@ -67,8 +68,12 @@ func GetTask(w http.ResponseWriter, r *http.Request) {
 func CreateTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var task Task
+
 	_ = json.NewDecoder(r.Body).Decode(&task)
 
+	// Sanitize user provided content to remove any harmful HTML elements
+	task.Content = bluemonday.UGCPolicy().Sanitize(task.Content)
+	task.Title = bluemonday.UGCPolicy().Sanitize(task.Title)
 	task.ID = len(tasks) + 1
 	tasks = append(tasks, task)
 
@@ -99,6 +104,10 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 			var updatedTask Task
 			_ = json.NewDecoder(r.Body).Decode(&updatedTask)
 			updatedTask.ID = taskID
+
+			// Sanitize user provided content to remove any harmful HTML elements
+			updatedTask.Content = bluemonday.UGCPolicy().Sanitize(updatedTask.Content)
+			updatedTask.Title = bluemonday.UGCPolicy().Sanitize(updatedTask.Title)
 			tasks[index] = updatedTask
 			json.NewEncoder(w).Encode(updatedTask)
 			return

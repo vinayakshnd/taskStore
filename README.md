@@ -50,6 +50,7 @@ curl --location 'http://0.0.0.0:8083/tasks/1' | jq .
 
 3. Create a new task.
 
+a. Simple request.
 ```
 curl --location 'http://0.0.0.0:8083/tasks' --data '{
   "id": 3,
@@ -61,6 +62,23 @@ curl --location 'http://0.0.0.0:8083/tasks' --data '{
   "title": "P1",
   "content": "This is a medium priority task"
 }
+```
+
+b. Task create request with untrusted user generated data.
+
+```
+curl --location 'http://10.13.106.157:8083/tasks' \
+--data '{
+  "id": 3,
+  "title": "P1 <a onblur=\"alert(secret)\" href=\"http://www.google.com\">Google</a>",
+  "content": "This is a medium priority task"
+}' | jq .
+{
+    "id": 3,
+    "title": "P1 <a href=\"http://www.google.com\" rel=\"nofollow\">Google</a>",
+    "content": "This is a medium priority task"
+}
+
 ```
 
 4. Delete existing task.
