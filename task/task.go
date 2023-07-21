@@ -74,6 +74,15 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	// Sanitize user provided content to remove any harmful HTML elements
 	task.Content = bluemonday.UGCPolicy().Sanitize(task.Content)
 	task.Title = bluemonday.UGCPolicy().Sanitize(task.Title)
+
+	// Check if task already exists
+	for _, t := range tasks {
+		if t.Title == task.Title && t.Content == task.Content {
+			json.NewEncoder(w).Encode(t)
+			return
+		}
+	}
+
 	task.ID = len(tasks) + 1
 	tasks = append(tasks, task)
 
